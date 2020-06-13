@@ -102,7 +102,7 @@ if __name__ == "__main__":
     create_folder(str(level))
 
     # 단어 추출 후 저장
-    for i in range(max_page):
+    for i in range(max_page+1):
         get_urls(str(level), str(i))
         for ur in url_array:
             get_words(str(level), str(i), ur)
