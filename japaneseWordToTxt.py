@@ -12,9 +12,8 @@ from bs4 import BeautifulSoup  # BeautifulSoup import
 # max_page = 35
 
 
-
 url_array = []
-
+word_number = [0]
 
 def get_urls(n_level, number):
     url_array.clear()
@@ -63,9 +62,11 @@ def get_words(n_level, number, url):
                     result = re.sub(r'\([^)]*\)', '', t[1].text)
                     if len(result) > 1:
                         print(result)
-                        print(number)
-                        with open('n' + n_level + '/' + number + '.txt', 'a') as f:
-                            f.write(result + "\n")
+                        print(number + '-' + str(word_number[0]))
+                        with open('n' + n_level + '/' + number + '.txt', 'a', encoding='utf8') as f:
+                            f.write(str(word_number[0]) + '.\n')
+                            f.write(result + "\n\n")
+                            word_number[0] += 1
                 except:
                     print("오류")
 
@@ -102,7 +103,8 @@ if __name__ == "__main__":
     create_folder(str(level))
 
     # 단어 추출 후 저장
-    for i in range(max_page+1):
+    for i in range(max_page + 1):
+        word_number[0] = 1
         get_urls(str(level), str(i))
         for ur in url_array:
             get_words(str(level), str(i), ur)
