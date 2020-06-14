@@ -59,7 +59,8 @@ def get_words(n_level, number, url):
             for te in tex:
                 try:
                     t = te.find_all("span")
-                    result = re.sub(r'\([^)]*\)', '', t[1].text)
+                    result = t[1].text
+                    # result = re.sub(r'\([^)]*\)', '', t[1].text) 후리가나 지우기
                     if len(result) > 1:
                         print(result)
                         print(number + '-' + str(word_number[0]))
@@ -97,7 +98,7 @@ if __name__ == "__main__":
     # n몇급짜리를?
     level = 3
     # ?페이지까지 추출할것인가
-    max_page = 35
+    max_page = 2
 
     # 폴더 생성
     create_folder(str(level))
